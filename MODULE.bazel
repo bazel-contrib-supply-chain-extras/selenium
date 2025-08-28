@@ -31,11 +31,19 @@ bazel_dep(name = "rules_ruby", version = "0.19.0")
 bazel_dep(name = "package_metadata", version = "HEAD")
 bazel_dep(name = "supply_chain_tools", version = "HEAD")
 
-# Until `rules_jvm_external` 6.8 ships
-single_version_override(
+# # Until `rules_jvm_external` 6.8 ships
+# single_version_override(
+#     module_name = "rules_jvm_external",
+#     patch_strip = 1,
+#     patches = ["//java:rules_jvm_external_javadoc.patch"],
+# )
+
+git_override(
     module_name = "rules_jvm_external",
-    patch_strip = 1,
+    remote = "https://github.com/bazel-contrib/rules_jvm_external.git",
+    commit = "1c5cfbf96de595a3e23cf440fb40380cc28c1aea",  # follow HEAD of main
     patches = ["//java:rules_jvm_external_javadoc.patch"],
+    patch_strip = 1,
 )
 
 multitool = use_extension("@rules_multitool//multitool:extension.bzl", "multitool")
