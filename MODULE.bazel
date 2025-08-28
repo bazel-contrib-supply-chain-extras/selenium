@@ -28,6 +28,9 @@ bazel_dep(name = "rules_python", version = "1.5.0")
 bazel_dep(name = "rules_proto", version = "7.0.2")
 bazel_dep(name = "rules_ruby", version = "0.19.0")
 
+bazel_dep(name = "package_metadata", version = "HEAD")
+bazel_dep(name = "supply_chain_tools", version = "HEAD")
+
 # Until `rules_jvm_external` 6.8 ships
 single_version_override(
     module_name = "rules_jvm_external",
