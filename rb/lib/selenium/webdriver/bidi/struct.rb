@@ -19,25 +19,24 @@
 
 module Selenium
   module WebDriver
-    module Types
+    class BiDi
       class Struct < ::Struct
         class << self
-          def define(*members, &blk)
-            klass = super(*members.map(&:to_sym), keyword_init: true, &blk)
-
-            klass.singleton_class.prepend(Module.new {
-              def new(*args, **opts)
-                norm = WebDriver::Types.normalize_args(args, opts)
-                super(**members.to_h { |m| [m, norm[m]] })
+          def new(*args, &block)
+            super do
+              define_method(:initialize) do |**kwargs|
+                converted_kwargs = kwargs.transform_keys { |key| self.class.camel_to_snake(key.to_s).to_sym }
+                super(*converted_kwargs.values_at(*self.class.members))
               end
-            })
-
-            klass
+              class_eval(&block) if block
+            end
           end
 
-          alias new define
+          def camel_to_snake(camel_str)
+            camel_str.gsub(/([A-Z])/, '_\1').downcase
+          end
         end
       end
-    end # Types
+    end # BiDi
   end # WebDriver
 end # Selenium
