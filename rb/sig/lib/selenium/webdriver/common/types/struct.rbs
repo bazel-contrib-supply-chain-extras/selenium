@@ -1,0 +1,9 @@
+module Selenium
+  module WebDriver
+    module Types
+      class Struct < ::Struct
+        def self.define: (*untyped members, ?keyword_init: bool, ?blk { () -> void }) -> Class
+      end
+    end
+  end
+end

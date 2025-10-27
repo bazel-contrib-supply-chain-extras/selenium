@@ -1,0 +1,9 @@
+module Selenium
+  module WebDriver
+    module Types
+      class Data < ::Data
+        def self.define: (*untyped members, ?blk { () -> void }) -> Class
+      end
+    end
+  end
+end
