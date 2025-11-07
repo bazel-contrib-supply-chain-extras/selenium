@@ -42,6 +42,24 @@ single_version_override(
     patches = ["//java:rules_jvm_external_javadoc.patch"],
 )
 
+git_override(
+    module_name = "aspect_rules_js",
+    remote = "https://github.com/bazel-contrib-supply-chain-extras/rules_js.git",
+    commit = "52031e30367a6ac1ac255d50594dba5243859ede",
+)
+git_override(
+    module_name = "aspect_rules_esbuild",
+    remote = "https://github.com/bazel-contrib-supply-chain-extras/rules_esbuild.git",
+    commit = "03a89bc9194708d2dfb15c2d4d6fe356a737667a",
+)
+
+git_override(
+    module_name = "supply-chain-go",
+    remote = "https://github.com/bazel-contrib/supply-chain.git",
+    commit = "d5269d147a7d3cf71072f0457c3144d7e2eea048",
+    strip_prefix = "lib/supplychain-go",
+)
+
 multitool = use_extension("@rules_multitool//multitool:extension.bzl", "multitool")
 multitool.hub(lockfile = "//:multitool.lock.json")
 use_repo(multitool, "multitool")
