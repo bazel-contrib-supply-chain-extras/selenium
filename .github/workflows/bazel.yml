@@ -197,7 +197,7 @@ jobs:
             ${{ inputs.run }}
           } 2>&1 | tee build/bazel-console.log
       - name: Rerun failures with debug
-        if: always()
+        if: failure()
         shell: bash
         run: ./scripts/github-actions/rerun-failures.sh '${{ inputs.run }}' '${{ inputs.rerun-with-debug }}'
       - name: Collect failed test logs
